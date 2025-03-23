@@ -12,7 +12,7 @@
 1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/generalov-viktar/social-network_otus.git
-cd social-network
+cd social-network_otus
 ```
 
 2. Создайте файл .env из примера:
@@ -27,7 +27,7 @@ docker-compose up -d --build
 
 4. Войдите в контейнер приложения:
 ```bash
-docker-compose exec app bash
+docker-compose exec app sh
 ```
 
 5. Установите зависимости:

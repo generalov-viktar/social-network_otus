@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "154b52c1-48cb-409d-a16d-d2ba2868d565",
+		"_postman_id": "f7f73279-9d7e-4503-876d-bb25caa4c1e6",
 		"name": "Social Network API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18864206",
-		"_collection_link": "https://otus22.postman.co/workspace/17de2a6d-dcb4-47f7-a0a8-f3977455942e/collection/18864206-154b52c1-48cb-409d-a16d-d2ba2868d565?action=share&source=collection_link&creator=18864206"
+		"_collection_link": "https://otus22.postman.co/workspace/17de2a6d-dcb4-47f7-a0a8-f3977455942e/collection/18864206-f7f73279-9d7e-4503-876d-bb25caa4c1e6?action=share&source=collection_link&creator=18864206"
 	},
 	"item": [
 		{
@@ -133,14 +133,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{base_url}}/api/user/5",
+					"raw": "{{base_url}}/api/user/{{user_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
 						"user",
-						"5"
+						"{{user_id}}"
 					]
 				},
 				"description": "Получение информации о пользователе по ID (требует авторизации)"
