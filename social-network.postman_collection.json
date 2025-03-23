@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "154b52c1-48cb-409d-a16d-d2ba2868d565",
+		"name": "Social Network API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18864206",
+		"_collection_link": "https://otus22.postman.co/workspace/17de2a6d-dcb4-47f7-a0a8-f3977455942e/collection/18864206-154b52c1-48cb-409d-a16d-d2ba2868d565?action=share&source=collection_link&creator=18864206"
+	},
+	"item": [
+		{
+			"name": "Регистрация пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 201) {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"user_id\", jsonData.user_id);",
+							"    console.log(\"ID пользователя успешно сохранен: \" + jsonData.user_id);",
+							"} else {",
+							"    console.error(\"Ошибка при получении ID пользователя: \" + pm.response.text());",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Иван\",\n    \"second_name\": \"Иванов\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\",\n    \"birthdate\": \"1990-01-01\",\n    \"biography\": \"Разработчик\",\n    \"city\": \"Москва\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/user/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				},
+				"description": "Регистрация нового пользователя"
+			},
+			"response": []
+		},
+		{
+			"name": "Авторизация",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"token\", jsonData.token);",
+							"    console.log(\"Токен успешно сохранен: \" + jsonData.token);",
+							"} else {",
+							"    console.error(\"Ошибка при получении токена: \" + pm.response.text());",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{user_id}}\",\n    \"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Авторизация пользователя и получение токена"
+			},
+			"response": []
+		},
+		{
+			"name": "Получение профиля пользователя",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/user/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"5"
+					]
+				},
+				"description": "Получение информации о пользователе по ID (требует авторизации)"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
